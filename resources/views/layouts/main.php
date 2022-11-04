@@ -8,13 +8,13 @@
 </head>
 <body>
     <header id="header">
-
+        header
     </header>
     <container id="container">
         <?php require $VIEW_NAME ?>
     </container>
     <footer id="footer">
-
+        footer
     </footer>
 </body>
 </html>
