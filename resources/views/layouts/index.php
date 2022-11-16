@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php require dirname(__DIR__) .'../../../global/global.php'?>
 <head>
     <meta charset="utf-8">
-    <title>EShopper - Bootstrap Shop Template</title>
+    <title>EShopper</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
-    <?php require dirname(__DIR__) .'../../../global/global.php' ?>
     <!-- Favicon -->
     <link href="../../assets/img/favicon.ico" rel="icon">
 
@@ -29,15 +28,18 @@
    <div id="app">
         <!-- Topbar Start -->
         <div id="header">
-            <?php require dirname(__DIR__) .'../components/header/header.php'?>
+            <?php require dirname(__DIR__) .'../components/header.php'?>
         </div>
         <!-- Topbar End -->
         <div id="container">
+            <div class="controller-page">
+                <?php require dirname(__DIR__) ."../components/controllerPageNav.php" ?>
+            </div>
            <?php require  dirname(__DIR__) . $VIEWS_NAME ?>
         </div>
         <!-- Footer Start -->
          <div id="footer">
-            <?php require dirname(__DIR__) . '../components/footer/footer.php' ?>
+            <?php require dirname(__DIR__) . '../components/footer.php' ?>
          </div>
         <!-- Footer End -->
         <!-- Back to Top -->
