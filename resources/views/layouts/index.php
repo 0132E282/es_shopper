@@ -35,7 +35,7 @@
             <div class="controller-page">
                 <?php require dirname(__DIR__) ."../components/controllerPageNav.php" ?>
             </div>
-           <?php require  dirname(__DIR__) . $VIEWS_NAME ?>
+            <?php require  dirname(__DIR__) . $VIEWS_NAME ?>
         </div>
         <!-- Footer Start -->
          <div id="footer">
