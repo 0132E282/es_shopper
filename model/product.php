@@ -1,14 +1,14 @@
 <?php 
 require 'dao/connectpdo.php';
 class Product {
-  public $id ;
-  public $name ;
-  public $description ;
-  public $price ;
-  public $status ;
-  public $discount ;
-  public $id_styles ;
-
+    public $id ;
+    public $name ;
+    public $description ;
+    public $price ;
+    public $status ;
+    public $discount ;
+    public $id_styles ;
+    public $style_name;
     public function __construct($id,$name, $description, $price, $status, $discount,$id_styles_product){
         $this->id = $id;
         $this->name = $name;
@@ -22,8 +22,16 @@ class Product {
     // get toàn bộ sản phẩm 
     public function getProduct($sort,$max_item=50,$page ,$isDeleteSort = 0){
         $start_rows =($page - 1)*$max_item;
-        $sql = "SELECT * FROM product WHERE delete_soft  = $isDeleteSort
-         ORDER BY '$sort' LIMIT $max_item OFFSET $start_rows";
+        $sql = "SELECT 
+        product.name as name,
+        product.description as description,
+        product.price as price, 
+        product.status as status,
+        product.discount as discount,
+        product.createAt as createAt,
+        style_product.name as name_style
+        from product INNER JOIN style_product ON style_product.id = product.id_styles
+        ORDER BY '$sort' LIMIT $max_item OFFSET $start_rows";
         $resultSet = pdo_execute($sql);
         if(count($resultSet) <= 0){
             sendResponse(200,'{"item":'.null.'}');

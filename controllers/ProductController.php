@@ -7,12 +7,12 @@
  $id_style_product = $_POST['id_style'] ?? '';
  $discount = $_POST['discount'] ?? '';
  $status=$_POST['status'] ?? '';
- $product =  new Product($id,$name , $description ,$price ,$id_style_product, $discount, $status);
+ $product =  new Product($id,$name , $description ,$price , $status, $discount,$id_style_product);
  // [get] ProductController.php?product=showAll?sort=DESC&limit=12&page=1
  if($_GET['product'] == 'show-all'){
-    $sort = $_GET['sort'];
-    $limit = $_GET['limit'];
-    $page = $_GET['page'];
+    $sort = $_GET['sort'] ?? 'DESC';
+    $limit = $_GET['limit'] ?? 50;
+    $page = $_GET['page'] ?? 1;
     $product-> getProduct($sort,$limit,$page);
  }elseif($_GET['product'] == 'show-one' && $_GET['id-product']){
     // [get] ProductController.php?product=showOne?productID=1
@@ -31,7 +31,5 @@
  }elseif($_GET['product'] == 'update-product'){
    // [get] ProductController.php?product= update-product&id-product= id product;
    $product-> updateProduct();
- }else{
-  echo 1;
  }
 ?>

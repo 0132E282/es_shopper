@@ -14,6 +14,6 @@ require dirname(__DIR__).'../model/user.php';
     $sort = $_GET['sort'] ?? 'DESC';
     $user->showUserList($sort,$maxItem,$page);
  }elseif(['user'] == 'show-one' && $id){
-
+   
  }
 ?>
