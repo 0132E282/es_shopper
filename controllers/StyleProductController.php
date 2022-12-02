@@ -1,8 +1,9 @@
 <?php
  require dirname(__DIR__).'../model/styles.php';
- $name = $_POST['name'] ?? '';
- $id = $_GET['id'] ?? '';
- $style = new Styles($id,$name);
+ $name = $_POST['name']??'';
+ $id = $_GET['id']??'';
+ $avatar = $_POST['avatar']??'';
+ $style = new Styles($id,$name,$avatar);
  if($_GET['style'] == 'show-all'){
   // [get ] show all styles 
     $style->showAll();
@@ -16,5 +17,7 @@
    //project_shop_fashion/shop_fashion/controllers/StyleProductController.php?style=create
    // [post] update a style
    $style -> update();
+ }else{
+  echo 1;
  }
 ?>

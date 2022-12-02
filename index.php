@@ -1,3 +1,3 @@
-<?php 
-  header('location: ./controllers/SiteController.php');
+<?php
+  header('location:./controllers/SiteController.php');
 ?>

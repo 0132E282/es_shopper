@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <div class="container-fluid mb-5">
     <div class="row border-top px-xl-5">
         <div class="col-lg-3 d-none d-lg-block">
@@ -37,8 +38,8 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="shop.html" class="nav-item nav-link">Shop</a>
+                        <a href="SiteController.php" class="nav-item nav-link active">Home</a>
+                        <a href="ProductController.php" class="nav-item nav-link">Shop</a>
                         <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
@@ -47,11 +48,26 @@
                                 <a href="checkout.html" class="dropdown-item">Checkout</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="SiteController.php?site=contact" class="nav-item nav-link">Contact</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="" class="nav-item nav-link">Login</a>
-                        <a href="" class="nav-item nav-link">Register</a>
+                        <?php
+                        $client = $_SESSION['client'] ?? '';
+                          if(!$client){
+                            echo '<a href="UserController.php?user=login" class="nav-item nav-link">Login</a>
+                            <a href="UserController.php?user=register" class="nav-item nav-link">Register</a>';
+                          }else{
+                             echo "<div class='controller_user'>
+                               chào phúc  <span> coin : 200 </span>
+                               <ul class='controller_user-list'>
+                                 <li class='controller_item'><a href='UserController.php?user=history'>tài khoản</a></li>
+                                 <li class='controller_item'><a href='UserController.php?user=history'>lịch sử mua</a></li>
+                                 <li class='controller_item'><a href='UserController.php?user=logout'>đăng xuất</a></li>
+                               </ul>
+                              </div>";
+                          }
+                        ?>
+                        
                     </div>
                 </div>
             </nav>

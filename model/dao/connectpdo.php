@@ -10,7 +10,23 @@ function pdo_get_connection($nameServer = 'localhost',$userName='root',$password
         echo "connection failed: ". $e->getMessage();
     }
 } 
-function pdo_execute($sql){
+function pdo_execute_row($sql){
+    $sql_args = array_slice(func_get_args(),1);
+    try{
+        $connect = pdo_get_connection();
+        $stmt = $connect->prepare($sql);
+        $stmt->execute($sql_args);
+        $row = $stmt->fetchAll();   
+        return $row;
+    }
+    catch(PDOException $e){
+        throw $e;
+    }
+    finally{
+        unset($connect);
+    }
+}
+function pdo_execute_id($sql){
     $sql_args = array_slice(func_get_args(),1);
     try{
         $connect = pdo_get_connection();

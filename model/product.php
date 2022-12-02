@@ -1,5 +1,5 @@
-<?php 
-require 'dao/connectpdo.php';
+<?php
+require_once 'dao/connectpdo.php';
 class Product {
     public $id ;
     public $name ;
@@ -32,7 +32,7 @@ class Product {
         style_product.name as name_style
         from product INNER JOIN style_product ON style_product.id = product.id_styles
         ORDER BY '$sort' LIMIT $max_item OFFSET $start_rows";
-        $resultSet = pdo_execute($sql);
+        $resultSet = pdo_execute_row($sql);
         if(count($resultSet) <= 0){
             sendResponse(200,'{"item":'.null.'}');
         }else{
@@ -43,7 +43,7 @@ class Product {
     // get lấy 1 sản phẩm
     public function getProductOne(){
         $sql = "SELECT * FROM product WHERE id = ? ";
-        $resultSet = pdo_execute($sql,$this->id);
+        $resultSet = pdo_execute_row($sql,$this->id);
         if(count($resultSet) <= 0){
             sendResponse(200,'{"item":'.null.'}');
         }else{
@@ -61,7 +61,7 @@ class Product {
             discount,
             id_styles
         )VALUE(?,?,?,?,?,?)";
-        $resultSet = pdo_execute($sql,
+        $resultSet = pdo_execute_row($sql,
             $this->name,
             $this->description,
             $this->price,
@@ -74,14 +74,14 @@ class Product {
     // xóa mềm (ân sản phẩm) sản phẩm
     public function deleteProductSoft($isSoft){
         $sql = "UPDATE product SET delete_soft = ? WHERE id = ?";
-        $resultSet = pdo_execute($sql,$isSoft,$this->id);
+        $resultSet = pdo_execute_row($sql,$isSoft,$this->id);
         sendResponse(200,'{"message":'.getStatusCodeMeeage(200).'}');
         return $resultSet;
     }
     // xóa toàn bộ sản phẩm 
     public function deleteProduct(){
         $sql = "DELETE FROM product WHERE id = ?";
-        $resultSet = pdo_execute($sql,$this->id);
+        $resultSet = pdo_execute_row($sql,$this->id);
         sendResponse(200,'{"message":'.getStatusCodeMeeage(200).'}');
         return $resultSet;
     }
@@ -95,7 +95,7 @@ class Product {
          discount =  ? , 
          id_styles = ?
          WHERE id = ? AND id IS NOT NULL";
-         $resultSet = pdo_execute($sql , 
+         $resultSet = pdo_execute_row($sql , 
             $this->name ,
             $this->description ,
             $this->price ,
@@ -109,7 +109,7 @@ class Product {
     }
     public function getIdProduct(){
         $sql = "SELECT id from product WHERE id = $this->id AND id IS NOT NULL";
-        $resultSet = pdo_execute($sql);
+        $resultSet = pdo_execute_row($sql);
         return $resultSet;
     }
 }

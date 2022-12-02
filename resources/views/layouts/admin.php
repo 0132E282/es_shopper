@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require dirname(__DIR__) .'../../../global/global.php'?>
+<?php require dirname(__DIR__) .'../../../global/global.php';
+?>
 <head>
     <meta charset="utf-8">
     <title>EShopper</title>
@@ -18,8 +19,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="<?=$ROOT_URL ?>/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="<?=$ASSETS_URL ?>/css/controllerPageNav.css" rel="stylesheet">
+    <link href=  "<?=$ROOT_URL ?>/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
     <!-- Customized Bootstrap Stylesheet -->
     <link href="<?=$ASSETS_URL ?>/css/style.css" rel="stylesheet">
 </head>
@@ -35,7 +36,7 @@
             <div class="controller-page">
                 <?php require dirname(__DIR__) ."../components/controllerPageNav.php" ?>
             </div>
-            <?php require  dirname(__DIR__) . $VIEWS_NAME ?>
+            <?php require  dirname(__DIR__) . $VIEWS_NAME '?>
         </div>
         <!-- Footer Start -->
          <div id="footer">
@@ -49,7 +50,7 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="<?=$ROOT_URL ?>/lib/easing/easing.min.js"></script>
+    <script src="<?=$ROOT_URL ?>lib/easing/easing.min.js"></script>
     <script src="<?=$ROOT_URL ?>/lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Contact Javascript File -->
@@ -57,7 +58,7 @@
     <script src="<?=$ROOT_URL ?>/mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="<?=$ASSETS_URL ?>/js/main.js"></script>
+    <script src="<?$ASSETS_URL?>/js/main.js"></script>
 </body>
 
 </html>

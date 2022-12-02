@@ -1,31 +1,39 @@
 <?php 
-require 'dao/connectpdo.php';
+require_once 'dao/connectpdo.php';
 class Styles {
     public $id;
     public $name;
-    public function __construct($id, $name){
+    public $avatar;
+    public function __construct($id,$name,$avatar){
         $this->id = $id;
         $this->name = $name;
+        $this->avatar = $avatar;
     }
-    public function showAll(){
-        $sql = "SELECT * FROM style_product ORDER BY createAt DESC limit 25 ";
-        $resultSet = pdo_execute($sql);
-        sendResponse(200,'{"item":'.json_encode($resultSet).'}');
+    public function showAll($max_time=25){
+        $sql = "SELECT * FROM styles_product ORDER BY createAt DESC limit $max_time";
+        $resultSet = pdo_execute_row($sql);
+        return $resultSet;
     }
     public function create(){
-        $sql = "INSERT INTO style_product(name) VALUE (?)";  
-        $resultSet = pdo_execute($sql,$this->name);
+        $sql = "INSERT INTO styles_product(name,avatar) VALUE (?,?)";  
+        $resultSet = pdo_execute_row($sql,$this->name,$this->avatar);
         sendResponse(200,'{"message":ok}');
+        return $resultSet;
     } 
     public function delete(){
-        $sql = "DELETE FROM style_product WHERE id = ?";  
-        $resultSet = pdo_execute($sql,$this->id);
+        $sql = "DELETE FROM styles_product WHERE id = ?";  
+        $resultSet = pdo_execute_row($sql,$this->id);
         sendResponse(200,'{"message":ok}');
+        return $resultSet;
     }
     public function update(){
-        $sql = "UPDATE style_product SET name = ? WHERE id = ?";     
-        $resultSet = pdo_execute($sql,$this->name,$this->id);
+        $sql = "UPDATE styles_product SET 
+        name = ?,
+        avatar = ?,
+        WHERE id = ?";     
+        $resultSet = pdo_execute_row($sql,$this->name,$this->avatar,$this->id);
         sendResponse(200,'{"message":ok}');
+        return $resultSet;
     }      
 }
 ?>
