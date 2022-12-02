@@ -54,7 +54,14 @@
             </a>
             <a href="ProductController.php?product=cart" class="btn border">
                 <i class="fas fa-shopping-cart text-primary"></i>
-                <span class="badge">0</span>
+                <span class="badge"><?php
+                  $product_list = $_COOKIE['product-cart'] ?? '';
+                  if(is_array(json_decode($product_list)) && count(json_decode($product_list)) > 0){
+                    echo count(json_decode($product_list));
+                  }else{
+                    echo 0;
+                  }
+                 ?></span>
             </a>
         </div>
     </div>

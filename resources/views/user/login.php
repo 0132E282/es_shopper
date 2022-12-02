@@ -31,7 +31,7 @@
 			<div class="form-control agileinfo">	
 				<input type="password" class="lock" name="password" placeholder="Mật khẩu " id="password1" required="">
 			</div>
-			<div class='err'><?=$err?></div>
+			<div class='err'><?=$err ?></div>
 			<input type="submit" class="register" value="Đăng Nhập">
 		</form>
 		<script type="text/javascript">
