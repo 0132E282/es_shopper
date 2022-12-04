@@ -39,9 +39,9 @@
                     foreach( $list_style as $style ){
                         echo '<div class="col-lg-4 col-md-6 pb-1">
                         <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-                            <p class="text-right">15 Products</p>
+                            <p class="text-right">'.$style['count_product'].' Products</p>
                             <a href="" class="cat-img position-relative overflow-hidden mb-3">
-                                <img class="img-fluid" src="'.$style['avatar'].'" alt="">
+                                <img class="img-fluid" src="'.$style['photo_url'].'" alt="">
                             </a>
                             <h5 class="font-weight-semi-bold m-0">'.$style['name'].'</h5>
                         </div>
@@ -57,7 +57,7 @@
                 <div class="row px-xl-5">
                     <div class="col-md-6 pb-4">
                         <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
-                            <img src="<?=$ASSETS_URL?>/img/offer-1.png" alt="">
+                            <img src="<?=$ASSETS_URL?>/image/offer-1.png" alt="">
                             <div class="position-relative" style="z-index: 1;">
                                 <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
                                 <h1 class="mb-4 font-weight-semi-bold">Spring Collection</h1>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="col-md-6 pb-4">
                         <div class="position-relative bg-secondary text-center text-md-left text-white mb-2 py-5 px-5">
-                            <img src="<?=$ASSETS_URL?>/img/offer-2.png" alt="">
+                            <img src="<?=$ASSETS_URL?>/image/offer-2.png" alt="">
                             <div class="position-relative" style="z-index: 1;">
                                 <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
                                 <h1 class="mb-4 font-weight-semi-bold">Winter Collection</h1>
@@ -87,14 +87,10 @@
                 </div>
                 <div class="product-trandy">
                     <div class="row px-xl-5 pb-3">
-                        <?php require dirname(__DIR__) . '../components/productItem.php'?>
-                        <?php require dirname(__DIR__) . '../components/productItem.php'?>
-                        <?php require dirname(__DIR__) . '../components/productItem.php'?>
-                        <?php require dirname(__DIR__) . '../components/productItem.php'?>
-                        <?php require dirname(__DIR__) . '../components/productItem.php'?>
-                        <?php require dirname(__DIR__) . '../components/productItem.php'?>
-                         <?php require dirname(__DIR__) . '../components/productItem.php'?>
-                        <?php require dirname(__DIR__) . '../components/productItem.php'?>
+                        <?php foreach($product_trandy_list as $product){
+                            require dirname(__DIR__) . '../components/productItem.php';
+                         }?>
+                       
                     </div>
                 </div>
             </div>
@@ -130,14 +126,11 @@
                         <h2 class="section-title px-5"><span class="px-2">Just Arrived</span></h2>
                     </div>
                     <div class="row px-xl-5 pb-3">
-                        <?php require dirname(__DIR__) . '../components/productItem.php'?>
-                        <?php require dirname(__DIR__) . '../components/productItem.php'?>
-                        <?php require dirname(__DIR__) . '../components/productItem.php'?>
-                        <?php require dirname(__DIR__) . '../components/productItem.php'?>
-                        <?php require dirname(__DIR__) . '../components/productItem.php'?>
-                        <?php require dirname(__DIR__) . '../components/productItem.php'?>
-                        <?php require dirname(__DIR__) . '../components/productItem.php'?>
-                        <?php require dirname(__DIR__) . '../components/productItem.php'?>
+                         <?php
+                          foreach($product_create_list  as $product){
+                            require dirname(__DIR__) . '../components/productItem.php';
+                          }
+                        ?>
                     </div>   
                 </div>
             </div>
@@ -150,28 +143,28 @@
                     <div class="col">
                         <div class="owl-carousel vendor-carousel">
                             <div class="vendor-item border p-4">
-                                <img src="<?=$ASSETS_URL?>/img/vendor-1.jpg" alt="">
+                                <img src="<?=$ASSETS_URL?>/image/vendor-1.jpg" alt="">
                             </div>
                             <div class="vendor-item border p-4">
-                                <img src="<?=$ASSETS_URL?>/img/vendor-2.jpg" alt="">
+                                <img src="<?=$ASSETS_URL?>/image/vendor-2.jpg" alt="">
                             </div>
                             <div class="vendor-item border p-4">
-                                <img src="<?=$ASSETS_URL?>/img/vendor-3.jpg" alt="">
+                                <img src="<?=$ASSETS_URL?>/image/vendor-3.jpg" alt="">
                             </div>
                             <div class="vendor-item border p-4">
-                                <img src="<?=$ASSETS_URL?>/img/vendor-4.jpg" alt="">
+                                <img src="<?=$ASSETS_URL?>/image/vendor-4.jpg" alt="">
                             </div>
                             <div class="vendor-item border p-4">
-                                <img src="<?=$ASSETS_URL?>/img/vendor-5.jpg" alt="">
+                                <img src="<?=$ASSETS_URL?>/image/vendor-5.jpg" alt="">
                             </div>
                             <div class="vendor-item border p-4">
-                                <img src="<?=$ASSETS_URL?>/img/vendor-6.jpg" alt="">
+                                <img src="<?=$ASSETS_URL?>/image/vendor-6.jpg" alt="">
                             </div>
                             <div class="vendor-item border p-4">
-                                <img src="<?=$ASSETS_URL?>/img/vendor-7.jpg" alt="">
+                                <img src="<?=$ASSETS_URL?>/image/vendor-7.jpg" alt="">
                             </div>
                             <div class="vendor-item border p-4">
-                                <img src="<?=$ASSETS_URL?>/img/vendor-8.jpg" alt="">
+                                <img src="<?=$ASSETS_URL?>/image/vendor-8.jpg" alt="">
                             </div>
                         </div>
                     </div>

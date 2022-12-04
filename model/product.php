@@ -9,7 +9,7 @@ class Product {
     public $discount ;
     public $id_styles ;
     public $style_name;
-    public function __construct($id,$name, $description, $price, $status, $discount,$id_styles_product){
+    public function __construct($id = "",$name = "", $description ="", $price="", $status ="", $discount ="",$id_styles_product=""){
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
@@ -20,27 +20,33 @@ class Product {
     }
    
     // get toàn bộ sản phẩm 
-    public function getProduct($sort,$max_item=50,$page ,$isDeleteSort = 0){
-        $start_rows =($page - 1)*$max_item;
-        $sql = "SELECT 
-        product.name as name,
+    public function product_all($sort,$sort_name,$max_item=50,$page,$isDeleteSort = 0){
+        $start_rows = ($page - 1) * $max_item;
+        $sql ="SELECT
+        product.id as id,
+        product.name_product as name,
         product.description as description,
-        product.price as price, 
-        product.status as status,
+        product.price_product as price,
         product.discount as discount,
         product.createAt as createAt,
-        style_product.name as name_style
-        from product INNER JOIN style_product ON style_product.id = product.id_styles
-        ORDER BY '$sort' LIMIT $max_item OFFSET $start_rows";
-        $resultSet = pdo_execute_row($sql);
-        if(count($resultSet) <= 0){
-            sendResponse(200,'{"item":'.null.'}');
-        }else{
-            sendResponse(200,'{"item":'.json_encode($resultSet).'}');
+        product.count_product as count_product,
+        product.discount as discount,
+        product.count_buy as count_buy,
+        styles_product.name as name_styles
+        from product INNER JOIN styles_product ON styles_product.id = product.id_styles
+        ORDER BY $sort_name $sort LIMIT $max_item OFFSET $start_rows";
+        $product_list = array();
+        $productDataBase = pdo_execute_row($sql);
+        foreach($productDataBase as $product){
+            $sql_image = 'SELECT photo_url FROM images_product WHERE id_product = '.$product['id'].' AND is_main = 1 ';
+            $image =  pdo_execute_row($sql_image);
+            $product['image'] = $image[0]['photo_url'];
+            array_push($product_list,$product);
         }
-        return $resultSet;
+        return $product_list;
     }
     // get lấy 1 sản phẩm
+
     public function getProductOne(){
         $sql = "SELECT * FROM product WHERE id = ? ";
         $resultSet = pdo_execute_row($sql,$this->id);

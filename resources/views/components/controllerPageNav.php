@@ -1,4 +1,4 @@
-<?php session_start() ?>
+<?php session_start()?>
 <div class="container-fluid mb-5">
     <div class="row border-top px-xl-5">
         <div class="col-lg-3 d-none d-lg-block">
