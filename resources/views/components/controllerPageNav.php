@@ -57,14 +57,26 @@
                             echo '<a href="UserController.php?user=login" class="nav-item nav-link">Login</a>
                             <a href="UserController.php?user=register" class="nav-item nav-link">Register</a>';
                           }else{
-                             echo "<div class='controller_user'>
-                               chào phúc  <span> coin : 200 </span>
-                               <ul class='controller_user-list'>
-                                 <li class='controller_item'><a href='UserController.php?user=history'>tài khoản</a></li>
-                                 <li class='controller_item'><a href='UserController.php?user=history'>lịch sử mua</a></li>
-                                 <li class='controller_item'><a href='UserController.php?user=logout'>đăng xuất</a></li>
-                               </ul>
-                              </div>";
+                            if($client['is_admin'] == 1){
+                                echo "<div class='controller_user'>
+                                    hi ". $client['last_name']." <span> coin :".$client['coin']." </span>
+                                    <ul class='controller_user-list'>
+                                        <li class='controller_item'><a href='UserController.php?user=history'>tài khoản</a></li>
+                                        <li class='controller_item'><a href='UserController.php?user=history'>vào trang admin</a></li>
+                                        <li class='controller_item'><a href='UserController.php?user=logout'>đăng xuất</a></li>
+                                    </ul>
+                               </div>";
+                            }else{
+                                echo "<div class='controller_user'>
+                                    hi ". $client['last_name']." <span> coin :".$client['coin']." </span>
+                                    <ul class='controller_user-list'>
+                                        <li class='controller_item'><a href='UserController.php?user=history'>tài khoản</a></li>
+                                        <li class='controller_item'><a href='UserController.php?user=history'>lịch sử mua</a></li>
+                                        <li class='controller_item'><a href='UserController.php?user=logout'>đăng xuất</a></li>
+                                    </ul>
+                               </div>";
+                            }
+                             
                           }
                         ?>
                         

@@ -1,14 +1,17 @@
 <?php 
   require  dirname(__DIR__) . '../model/styles.php';
   require dirname(__DIR__) .'../model/product.php';
+
   $controller = $_GET['site'] ?? '';
   $method = $_GET['method'] ?? ' ' ;
+
   $idStyle = $_GET['id_styles']??'';
   $nameStyle = $_POST['name_style']??'';
   $avatarStyle = $_POST['avatar_style']??'';
   $style = new Styles($idStyle,$nameStyle,$avatarStyle);
 
   $product =  new Product();
+
 
   if($controller == 'checkout'){
     $VIEWS_NAME = '../site/checkout.php';
@@ -20,7 +23,6 @@
     $VIEWS_NAME = '../site/home.php';
     $max_item = 6;
     $list_style = $style -> showAll($max_item);
-
     $max_item_product = 8;
     $page = 1;
     $sort = "DESC";

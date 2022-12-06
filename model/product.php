@@ -40,22 +40,36 @@ class Product {
         foreach($productDataBase as $product){
             $sql_image = 'SELECT photo_url FROM images_product WHERE id_product = '.$product['id'].' AND is_main = 1 ';
             $image =  pdo_execute_row($sql_image);
-            $product['image'] = $image[0]['photo_url'];
+            $product['image'] = $image[0][0];
             array_push($product_list,$product);
         }
         return $product_list;
     }
     // get lấy 1 sản phẩm
 
-    public function getProductOne(){
-        $sql = "SELECT * FROM product WHERE id = ? ";
-        $resultSet = pdo_execute_row($sql,$this->id);
-        if(count($resultSet) <= 0){
-            sendResponse(200,'{"item":'.null.'}');
-        }else{
-            sendResponse(200,'{"item":'.json_encode($resultSet).'}');
+    public function show_product_one(){
+        $sql = "SELECT
+        product.id as id,
+        product.name_product as name,
+        product.description as description,
+        product.price_product as price,
+        product.discount as discount,
+        product.createAt as createAt,
+        product.count_product as count_product,
+        product.count_buy as count_buy,
+        product.count_like as count_like,
+        product.count_comment as count_comment,
+        product.updateAt as updateAt,
+        product.deleteAt as deleteAt,
+        styles_product.name as name_styles
+        from product INNER JOIN styles_product ON styles_product.id = product.id_styles WHERE  product.id = ?";
+        $product = pdo_execute_row($sql,$this->id);
+        if($product){
+            $sql_image = 'SELECT photo_url FROM images_product WHERE id_product = '.$product[0]['id'].' AND is_main = 1 ';
+            $image =  pdo_execute_row($sql_image);
+            $product[0]['image'] = $image[0][0];
         }
-        return $resultSet;
+        return $product[0];
     }
     // tạo một sản phẩm 
     public function createProduct(){
@@ -75,7 +89,6 @@ class Product {
             $this->discount,
             $this->id_styles
         );
-        sendResponse(200,'{"message":'.getStatusCodeMeeage(200).'}');
     }
     // xóa mềm (ân sản phẩm) sản phẩm
     public function deleteProductSoft($isSoft){
@@ -110,7 +123,7 @@ class Product {
             $this->id_styles,
             $this->id,
          );
-         sendResponse(200,'{"message":'.getStatusCodeMeeage(200).'}');
+
          return $resultSet;
     }
     public function getIdProduct(){

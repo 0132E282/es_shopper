@@ -3,7 +3,7 @@
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
             <h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart</h1>
             <div class="d-inline-flex">
-                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0"><a href="SiteController.php">Home</a></p>
                 <p class="m-0 px-2">-</p>
                 <p class="m-0">Shopping Cart</p>
             </div>
@@ -29,11 +29,12 @@
                     <tbody class="align-middle">
                        <?php
                          $product_list = $_COOKIE['product-cart'] ?? '';
-                         if(is_array(json_decode($product_list))){
-                            foreach(json_decode($product_list) as $product){
-                                echo '<tr>
-                                <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>
-                                <td class="align-middle">$150</td>
+                        
+                         if(is_array(json_decode($product_list,true)) && count(json_decode($product_list,true)) > 0){
+                            foreach(json_decode($product_list,true) as $key => $product){
+                                echo '<tr class="product-item" >
+                                <td class="align-middle "><img src="'.$product['image'].'" alt="'.$product['name'].'" style="width: 50px;"> '.$product['name'].'</td>
+                                <td class="align-middle price-product" data-value="'.$product['price'].'">'.$product['price'].'</td>
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
                                         <div class="input-group-btn">
@@ -41,20 +42,22 @@
                                             <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
-                                        <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
+                                        <input type="text"value="'.$product['count'].'" class="count-product form-control form-control-sm bg-secondary text-center" >
                                         <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-plus">
+                                            <button onclick="handleTotalPriceItemProduct(this)" class="btn btn-sm btn-primary btn-plus">
                                                 <i class="fa fa-plus"></i>
                                             </button>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                                <td class="align-middle total-product">'.$product['count'] * $product['price'] .'</td>
+                                <td class="align-middle"><a class="btn btn-sm btn-primary" href="productController.php?product=cart&method=delete&id-product='.$key.'">
+                                   <i class="fa fa-times"></i>
+                                </a></td>
                             </tr>'; }
                          } else{
                             echo '<td class="align-middle">hây thêm sản phâm</td>';
-                         }   
+                         }                        
                        ?>
                     </tbody>
                 </table>
@@ -62,9 +65,9 @@
             <div class="col-lg-4">
                 <form class="mb-5" action="">
                     <div class="input-group">
-                        <input type="text" class="form-control p-4" placeholder="Coupon Code">
+                        <input type="text"  class="form-control p-4" >
                         <div class="input-group-append">
-                            <button class="btn btn-primary">Apply Coupon</button>
+                            <button  class="btn btn-primary">Apply Coupon</button>
                         </div>
                     </div>
                 </form>
@@ -94,3 +97,15 @@
         </div>
     </div>
     <!-- Cart End -->
+<script>
+    
+ function handleTotalPriceItemProduct(e){
+    const productItem = e.parentElement.parentElement.parentElement.parentElement;
+    const totalProduct = productItem.querySelector('.total-product');
+    const priceProduct = productItem.querySelector('.price-product').getAttribute('data-value');
+    const countProduct = productItem.querySelector('.count-product').value;
+    totalProduct.innerHTML = priceProduct * (countProduct + 1) ;
+    totalProduct.setAttribute('data-value',priceProduct * countProduct);
+ }
+
+</script>
