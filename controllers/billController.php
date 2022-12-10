@@ -4,6 +4,7 @@ $controller = $_GET['bill'] ?? '';
 $method = $_GET['method'] ?? '';
 
 $bill = new Bill();
+
 if($controller === 'create'){
   $id_bill =  $bill -> createBill();
   if($id_bill){
@@ -12,6 +13,6 @@ if($controller === 'create'){
        $bill -> create_bill_cart($product['id'],$product['count'],$id_bill);
     }
   }
-  header('Location: ' . $_SERVER['HTTP_REFERER']);
+  header('Location: '. $_SERVER['HTTP_REFERER']);
 }
 ?>

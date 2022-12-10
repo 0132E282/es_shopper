@@ -9,6 +9,8 @@ require_once 'dao/connectpdo.php';
     public $detail_address;
     public $city;
     public $district;
+    public $total_product;
+    public $price_shipper;
     public function __construct(){
        $this->name = $_POST['name'] ?? '';
        $this->email = $_POST['email'] ?? '';
