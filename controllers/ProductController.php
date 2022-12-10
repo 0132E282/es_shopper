@@ -53,8 +53,28 @@ $method = $_GET['method'] ?? '';
 
    require '../resources/views/layouts/productLayout.php';
  }elseif($controller == 'cart'){
-   if($method == 'delete'){
+   if($method == 'put'){
+    $product_info = $product -> show_product_one();
+    // add product to cart 
+    $product_add = array(
+      'id' => $id_product,
+      'count' => $_GET['count-product'] ?? 1,
+      'name' =>  $product_info['name'],
+      'price' => $product_info['price'],
+      'image' => $product_info['image'],
+      'size' => $_GET['size'] ?? '',
+      'color'=> $_GET['color'] ?? '',
+    );
     $productCart = json_decode($_COOKIE['product-cart'] ?? '');
+    if(!is_array($productCart)){
+      setcookie('product-cart',json_encode(array($product_add)),time() +(86400 * 30));
+    }else{
+        array_push($productCart, $product_add);
+        setcookie('product-cart',json_encode($productCart),time() +(86400 * 30));
+     }
+      header('Location: ' . $_SERVER['HTTP_REFERER']);
+   }elseif($method == 'delete'){
+    $productCart = json_decode($_COOKIE['product-cart'] ?? '',true);
     unset($productCart[$id_product]);
     setcookie('product-cart',json_encode($productCart),time() +(86400 * 30));
     header('Location: ' . $_SERVER['HTTP_REFERER']);
@@ -62,26 +82,6 @@ $method = $_GET['method'] ?? '';
     $VIEWS_NAME = '../product/cart.php';
     require dirname(__DIR__).'../resources/views/layouts/productLayout.php';
    }
- }elseif($controller == 'add-cart' && $id_product){
-  $product_info = $product -> show_product_one();
-  // add product to cart 
-  $product_add = array(
-    'id' => $id_product,
-    'count' => $_GET['count-product'] ?? 1,
-    'name' =>  $product_info['name'],
-    'price' => $product_info['price'],
-    'image' => $product_info['image'],
-    'size' => $_GET['size'] ?? '',
-    'color'=> $_GET['color'] ?? '',
-  );
-  $productCart = json_decode($_COOKIE['product-cart'] ?? '');
-  if(!is_array($productCart)){
-    setcookie('product-cart',json_encode(array($product_add)),time() +(86400 * 30));
-  }else{
-      array_push($productCart, $product_add);
-      setcookie('product-cart',json_encode($productCart),time() +(86400 * 30));
-   }
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
  }else{
     $VIEWS_NAME = '../product/shop.php';
     $max_item_product = $_GET['max-item'] ?? 12;

@@ -55,6 +55,8 @@
 
     <!-- Template Javascript -->
     <script src="<?=$ASSETS_URL ?>/js/main.js"></script>
+    <script src="<?=$ASSETS_URL ?>/js/money.js"></script>
+
 </body>
 
 </html>
