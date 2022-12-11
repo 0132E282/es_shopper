@@ -12,7 +12,6 @@
 
   $product =  new Product();
 
-
   if($controller == 'checkout'){
     $VIEWS_NAME = '../site/checkout.php';
     require dirname(__DIR__) . '../resources/views/layouts/productLayout.php';

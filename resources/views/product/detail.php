@@ -1,5 +1,6 @@
     <!-- Shop Detail Start -->
-    <div class="container-fluid py-5">
+<div class="container-fluid py-5">
+    <form method="POST" action="ProductController.php?product=cart&&method=put&id-product=<?php echo $_GET['id-product'] ?>">
         <div class="row px-xl-5">
             <div class="col-lg-5 pb-5">
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
@@ -37,7 +38,7 @@
                 <p class="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit clita ea. Sanc invidunt ipsum et, labore clita lorem magna lorem ut. Erat lorem duo dolor no sea nonumy. Accus labore stet, est lorem sit diam sea et justo, amet at lorem et eirmod ipsum diam et rebum kasd rebum.</p>
                 <div class="d-flex mb-3">
                     <p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
-                    <form>
+                  
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" value ="XS" class="custom-control-input" id="size-1" name="size">
                             <label class="custom-control-label" for="size-1">XS</label>
@@ -58,11 +59,10 @@
                             <input type="radio" class="custom-control-input" id="size-5" name="size">
                             <label class="custom-control-label" for="size-5">XL</label>
                         </div>
-                    </form>
+
                 </div>
                 <div class="d-flex mb-4">
                     <p class="text-dark font-weight-medium mb-0 mr-3">Colors:</p>
-                    <form>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="color-1" name="color">
                             <label class="custom-control-label" for="color-1">Black</label>
@@ -83,7 +83,6 @@
                             <input type="radio" class="custom-control-input" id="color-5" name="color">
                             <label class="custom-control-label" for="color-5">Green</label>
                         </div>
-                    </form>
                 </div>
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
@@ -92,7 +91,7 @@
                             <i class="fa fa-minus"></i>
                             </button>
                         </div>
-                        <input type="text" class="form-control bg-secondary text-center" value="1">
+                        <input type="text" class="form-control bg-secondary text-center" name="count" value="1">
                         <div class="input-group-btn">
                             <button class="btn btn-primary btn-plus">
                                 <i class="fa fa-plus"></i>
@@ -257,7 +256,8 @@
                     }?>
                 </div>
             </div>
-        </div>
+        </div>     
+     </form>
     </div>
     <!-- Products End -->
 <script>

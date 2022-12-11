@@ -9,14 +9,14 @@ class Product {
     public $discount ;
     public $id_styles ;
     public $style_name;
-    public function __construct($id = "",$name = "", $description ="", $price="", $status ="", $discount ="",$id_styles_product=""){
-        $this->id = $id;
-        $this->name = $name;
-        $this->description = $description;
-        $this->price = $price;
-        $this->status = $status;
-        $this->discount = $discount;
-        $this->id_styles = $id_styles_product;
+    public function __construct(){
+        $this->id = $_GET['id-product'] ?? '';
+        $this->name = $_POST['name'] ?? '';
+        $this->description =  $_POST['description'] ?? '';
+        $this->price = $_POST['price'] ?? '';
+        $this->status = $_POST['status'] ?? '';
+        $this->discount = $_POST['discount'] ?? '';
+        $this->id_styles = $_POST['id_style'] ?? '';
     }
    
     // get toàn bộ sản phẩm 

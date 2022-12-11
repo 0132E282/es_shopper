@@ -25,6 +25,7 @@
                         <tr>
                             <th>Products</th>
                             <th>Price</th>
+                            <th>info</th>
                             <th>Quantity</th>
                             <th>Total</th>
                             <th>Remove</th>
@@ -37,6 +38,10 @@
                                 echo '<tr class="product-item" data-value="'.$key.'">
                                 <td class="align-middle "><img src="'.$product['image'].'" alt="'.$product['name'].'" style="width: 50px;"> '.$product['name'].'</td>
                                 <td class="align-middle show-price price-product" data-value="'.$product['price'].'"></td>
+                                <td class="align-middle ">
+                                  <p>color:'.$product['color'].' </p>
+                                  <p>size: '.$product['size'].' </p>
+                                </td>
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
                                         <div class="input-group-btn">
@@ -53,6 +58,7 @@
                                     </div>
                                 </td>
                                 <td class="align-middle show-price " data-value="'.$product['count'] * $product['price'] .'"></td>
+
                                 <td class="align-middle"><a class="btn btn-sm btn-primary" href="productController.php?product=cart&method=delete&id-product='.$key.'">
                                    <i class="fa fa-times"></i>
                                 </a></td>

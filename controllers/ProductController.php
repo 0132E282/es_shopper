@@ -4,25 +4,9 @@
  require dirname(__DIR__) .'../model/review.php';
 $controller = $_GET['product'] ?? '';
 $method = $_GET['method'] ?? '';
- // modal product 
- $id_product = $_GET['id-product'] ?? '';
- $name = $_POST['name'] ?? '';
- $description = $_POST['description'] ?? '';
- $price = $_POST['price'] ?? ' ';
- $id_style_product = $_POST['id_style'] ?? '';
- $discount = $_POST['discount'] ?? '';
- $status=$_POST['status'] ?? '';
- $product =  new Product( $id_product,$name ,$description ,$price , $status, $discount,$id_style_product);
-// modal images
- $id_images = ' ';
- $photo_url = ' ';
- $images =  new Images( $id_images,$photo_url,$id_product);
-  // review 
-  $comment = $_POST['comment'] ?? ' ';
-  $name = $_POST['name'] ?? ' ';
-  $email = $_POST['email'] ?? ' ';
-  $review = $_POST['review'] ?? 5;
-  $review = new Review($comment,$name,$email,$review,$id_product);
+ $product =  new Product();
+ $images = new Images();
+  
  if($controller == 'create-product'){
    // [post] ProductController.php?product=create-product
    // làm lại
@@ -57,13 +41,13 @@ $method = $_GET['method'] ?? '';
     $product_info = $product -> show_product_one();
     // add product to cart 
     $product_add = array(
-      'id' => $id_product,
+      'id' => $product_inf['id'],
       'count' => $_GET['count-product'] ?? 1,
       'name' =>  $product_info['name'],
       'price' => $product_info['price'],
       'image' => $product_info['image'],
-      'size' => $_GET['size'] ?? '',
-      'color'=> $_GET['color'] ?? '',
+      'size' => $_POST['size'] ?? '',
+      'color'=> $_POST['color'] ?? '',
     );
     $productCart = json_decode($_COOKIE['product-cart'] ?? '');
     if(!is_array($productCart)){
@@ -75,7 +59,7 @@ $method = $_GET['method'] ?? '';
       header('Location: ' . $_SERVER['HTTP_REFERER']);
    }elseif($method == 'delete'){
     $productCart = json_decode($_COOKIE['product-cart'] ?? '',true);
-    unset($productCart[$id_product]);
+    unset($productCart[$_GET['id-product']]);
     setcookie('product-cart',json_encode($productCart),time() +(86400 * 30));
     header('Location: ' . $_SERVER['HTTP_REFERER']);
    }else{

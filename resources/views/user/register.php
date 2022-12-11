@@ -24,24 +24,39 @@
 		<p class="agileits2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 	</div>
 	<div class="content-agile2">
+		<?php 
+		  
+		?>
 		<form action="UserController.php?user=register&method=create"  method="POST" name = "account_register">
-			<div class="form-control w3layouts"> 
-				<input type="text" id="firstname" name="username" placeholder="Tên đăng nhập" title="Please enter your First Name" required="">
-			</div>
-
-			<div class="form-control w3layouts">	
-				<input type="email" id="email" name="email" placeholder="mail@gmail.com" title="Please enter a valid email" required="">
-			</div>
-
-			<div class="form-control agileinfo">	
-				<input type="password" class="lock" name="password" placeholder="Mật khẩu" id="password1" required="">
-			</div>	
-
-			<div class="form-control agileinfo">	
-				<input type="password" class="lock" name="confirm-password" placeholder="Nhập lại mật khẩu" id="password2" required="">
-			</div>			
-			
-			<input type="submit" class="register" value="tạo tài khoản">
+			<?php 
+			     $account_register = isset($_SESSION['account-register'])? json_decode( $_SESSION['account-register'] ,true) : array();;
+				 if(count($account_register) < 1){
+					echo '<div class="form-control w3layouts"> 
+					    <input type="text" id="firstname" name="username" placeholder="Tên đăng nhập" title="Please enter your First Name" required="">
+					</div>
+					<div class="form-control w3layouts">	
+						<input type="email" id="email" name="email" placeholder="mail@gmail.com" title="Please enter a valid email" required="">
+					</div>
+					<div class="form-control agileinfo">	
+						<input type="password" class="lock" name="password" placeholder="Mật khẩu" id="password1" required="">
+					</div>	
+		
+					<div class="form-control agileinfo">	
+						<input type="password" class="lock" name="confirm-password" placeholder="Nhập lại mật khẩu" id="password2" required="">
+					</div>	';
+				 }else{
+					echo '<div class="form-control w3layouts"> 
+					     <input type="text" id="firstname" name="last-name" placeholder="Nhập họ" title="Please enter your First Name" required="">
+					</div>
+					<div class="form-control w3layouts">	
+						<input type="text" id="email" name="first-name" placeholder="Nhập tên" title="Please enter a valid email" required="">
+					</div>
+					<div class="form-control agileinfo">	
+						<input type="text" class="lock" name="font-number" placeholder="Nhập SĐT" id="password1" required="">
+					</div>';
+				 }
+			?>
+			<input type="submit" name="submit" class="register" value="tạo tài khoản">
 		</form>
 		<script type="text/javascript">
 			const form = document.forms['account_register'];
@@ -71,10 +86,7 @@
 	<div class="clear"></div>
   </div>
   <?php
-   $titleModal ='Thành công';
-   $contentModal = 'Tạo tài khoảng thành công';
-   $url = 'UserController.php?user=login';
-   $icon = '<i class="fa-duotone fa-check"></i>';
+
    require dirname(__DIR__) . '../components/modal.php' ?>
 <p class="copyright w3l">© 2017 Official Signup Form. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">W3layouts</a></p>
 </body>

@@ -9,15 +9,15 @@
     public $userName;
     public $status;
     public $email;
-    public function __construct($id,$userName,$password,$lastName,$firstName,$email,$fontNumber=0,$status=0){
-        $this->id = $id;
-        $this->lastName = $lastName;
-        $this->firstName = $firstName;
-        $this->userName = $userName;
-        $this->password= $password;
-        $this->fontNumber = $fontNumber;
-        $this->status = $status;
-        $this->email = $email;
+    public function __construct(){
+        $this->id = $_GET['id_user'] ??'';
+        $this->lastName = $_POST['last_name'] ?? '';
+        $this->firstName =  $_POST['first_name'] ?? '';
+        $this->userName =  $_POST['username'] ?? '';
+        $this->password=  $_POST['password'] ?? '';
+        $this->fontNumber =  $_POST['username'] ?? '';
+        $this->status =  $_POST['status'] ?? 0;
+        $this->email =  $_POST['email'] ?? '';
     }
     public function showUserList($sort,$maxItem,$page){ 
         $per_page = ($page-1)*$maxItem;
@@ -47,17 +47,18 @@
             last_name,
             email,
             font_number,
-            status) value(
-                '$this->userName',
-                '$this->password',
-                '$this->firstName',
-                '$this->lastName',
-                '$this->email',
-                 $this->fontNumber,
-                 $this->status)";
-        $resultSet = pdo_execute_id($sql);
-        sendResponse(200,'{"item":'.json_encode($resultSet).'}');
-        return $resultSet;
+            status) 
+        value(
+            '$this->userName',
+            '$this->password',
+            '$this->firstName',
+            '$this->lastName',
+            '$this->email',
+            $this->fontNumber,
+            $this->status
+        )";
+        pdo_execute_id($sql);
+        return true;
     }
  }
 ?>

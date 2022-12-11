@@ -117,8 +117,3 @@
         </div>
     </form>
 </div>
-<script>
-    const paymentList = document.querySelectorALL('input[type="radio"]');
-
-   
-</script>

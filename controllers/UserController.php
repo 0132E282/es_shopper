@@ -4,13 +4,7 @@ ob_start();
 require  dirname(__DIR__) . '../model/user.php';
 $controller = $_GET['user'] ?? '';
 $method = $_GET['method'] ?? ''; 
-$id_user = $_GET['id_user'] ?? '';
-$username = $_POST ['username'] ?? '';
-$password = $_POST ['password'] ?? '';
-$last_name = $_POST ['last_name'] ?? '';
-$first_name = $_POST ['first_name'] ?? '';
-$email = $_POST ['email'] ?? '';
-$user = new User($id_user,$username,$password,$last_name, $first_name,$email);
+$user = new User();
 
 if($controller == 'login'){
     $err ='';
@@ -29,14 +23,38 @@ if($controller == 'login'){
    header('location: SiteController.php');
  }elseif($controller = 'register' ){
    $isModal = false;
+   $account_register = isset($_SESSION['account-register']) ? json_decode( $_SESSION['account-register'] ,true) : array();;
    if($method  == 'create'){
       $userAccount =  $user -> checkUser();
-      $configPassword = $_POST['confirm-password'];
-      if(!$userAccount && $password == $configPassword){
-        $user->create();
-        $isModal = true;
+      $configPassword = $_POST['confirm-password'] ?? '';
+      $password = $_POST['password'] ?? '';
+      if(!$userAccount && $password == $configPassword  ){
+        if(is_array($account_register) && count($account_register) < 1 ){
+          if( isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirm-password'])){
+            $account_register['username'] = $_POST['username'] ?? '';
+            $account_register['password'] =  $password;
+            $account_register['email'] = $_POST['email'];
+            $_SESSION['account-register'] = json_encode($account_register);
+          }else{
+            $err = "bạn chua nhập thông tin";
+          }
+        }else{
+          if(isset($_POST['last-name']) && isset($_POST['first-name'])){
+            $user -> lastName = $_POST['last-name'] ?? '';
+            $user -> firstName = $_POST['first-name'] ?? '';
+            $user -> userName = $account_register['username'];
+            $user -> password = $account_register['password'];
+            $user -> email = $account_register['email'] ?? '';
+            $user -> fontNumber =  $_POST['font-number'] ?? '';
+            $isModal = $user -> create();
+            unset($_SESSION['account-register']);
+
+          }else{
+
+          }
+        }
       }
-   }
-   require_once dirname(__DIR__).'../resources/views/user/register.php';
+    }
+    require_once dirname(__DIR__).'../resources/views/user/register.php';
  }
 ?>
